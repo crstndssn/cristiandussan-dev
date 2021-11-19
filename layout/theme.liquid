@@ -8,6 +8,8 @@
     <link rel="canonical" href="{{ canonical_url }}">
     <link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
 
+    <link rel="stylesheet" href="{{ 'main.css' | asset_url }}">
+
     {%- if settings.favicon != blank -%}
       <link rel="icon" type="image/png" href="{{ settings.favicon | img_url: '32x32' }}">
     {%- endif -%}
@@ -121,6 +123,9 @@
       <link rel="stylesheet" href="{{ 'component-predictive-search.css' | asset_url }}" media="print" onload="this.media='all'">
     {%- endif -%}
 
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+    <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js" defer="defer"></script>
+
     <script>document.documentElement.className = document.documentElement.className.replace('no-js', 'js');</script>
   </head>
 
@@ -131,6 +136,28 @@
 
     {% section 'announcement-bar' %}
     {% section 'header' %}
+
+    <div class="side-cart-overlay" id="sideCartOverlay">
+      <div class="side-cart">
+        <div class="side-cart___header">
+          <p class="side-cart__title">
+            Cart
+          </p>
+          <button
+            type="button"
+            class="side-cart__close-button js-close-side-cart"
+            aria-label="{{ 'accessibility.close' | t }}"
+            id="sideCartCloseButton"
+          >
+            X
+          </button>
+        </div>
+        <div id="sideCartContent">
+          {% section 'side-cart' %}
+        </div>
+      </div>
+    </div>
+    
     <main id="MainContent" class="content-for-layout focus-none" role="main" tabindex="-1">
       {{ content_for_layout }}
     </main>
@@ -164,9 +191,13 @@
         shareSuccess: `{{ 'general.share.success_message' | t }}`,
       }
     </script>
+    <script src="{{ 'jquery.min.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'slick.min.js' | asset_url }}" defer="defer"></script>
 
     {%- if settings.predictive_search_enabled -%}
       <script src="{{ 'predictive-search.js' | asset_url }}" defer="defer"></script>
     {%- endif -%}
+
+    <script src="{{ 'main.js' | asset_url }}" defer="defer"></script>
   </body>
 </html>

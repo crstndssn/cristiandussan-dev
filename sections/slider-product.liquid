@@ -1,0 +1,55 @@
+<!-- <div class="slider-products">
+  {% for block in section.blocks %}
+  <div>
+    <h2>{{ block.settings.text_slider_product }}</h2>
+    <p>{{ block.settings.description_slider_product }}</p>
+    <img src="{{ block.settings.imagen_slider_product | img_url }}" width="auto" height="auto" loading="lazy" alt="" srcset="">
+  </div>
+  {% endfor %}
+</div> -->
+
+{% liquid
+  assign titles = product.metafields.my_fields.title | split: "|" 
+  assign descriptions = product.metafields.my_fields.description | split: "|" 
+  assign images = product.metafields.my_fields.imagen | split: "|"
+%}
+
+<div class="slider-products">
+    {% for title in titles %}
+    <div>
+      <h1>{{ title }} </h1>
+      <p>{{ descriptions[forloop.index0] }}</p>
+        <img src="{{ images[forloop.index0] | file_url }}" width="200" height="auto" loading="lazy" alt="" srcset="">
+        </div>  
+    {% endfor %}
+</div>
+
+
+{% schema %}
+{
+  "name": "Slider product",
+  "blocks": [
+    {
+      "type": "section",
+      "name": "Slider product",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text_slider_product",
+          "label": "Text Slider Product" 
+        },
+        {
+          "type": "richtext",
+          "id": "description_slider_product",
+          "label": "Description Slider Product" 
+        },
+        {
+          "type": "image_picker",
+          "id": "imagen_slider_product",
+          "label": "Imagen Slider Product" 
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,23 @@
+<div class="products">
+  {% for product in collections['all'].products %}
+  <div class="products__card">
+    <a href="{{ product.url }}">
+      <img class="products__card--imagen imagen-variant" src="{{ product | img_url: "large" }}" width="auto"
+        height="auto" alt="" loading="lazy">
+    </a>
+    <h2 class="products__card--title">{{ product.title }}</h2>
+    {%- unless product.has_only_default_variant -%}
+
+    <div class="products__card--variants">
+    {% for variant in product.variants %}
+          <p class="product-variant" id="{{ variant.image | img_url: "large" }}">
+      {{ variant.title }}</p>
+    {% endfor %}
+    </div>
+
+    {% endunless %}
+
+    <a class="products__card--cta" href="{{ product.url }}">{{ product.price | money }}</a>
+  </div>
+  {% endfor %}
+</div>

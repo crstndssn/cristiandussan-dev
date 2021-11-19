@@ -1,0 +1,22 @@
+<div class="side-cart__body">
+  {% for item in cart.items %}
+  <article>
+    <img src="{{ item.image | img_url: " 100x" }}" width="auto" height="auto" loading="lazy" />
+    <span>{{ item.title }}</span>
+    <span>{{ item.price | money }}</span>
+    <div class="side-cart__controls" data-quantity="{{ item.quantity }}">
+      <button class="js-increase-product-quantity" data-variant-id="{{item.variant.id}}">+</button>
+      <span>{{ item.quantity }}</span>
+      <button class="js-decrease-product-quantity" data-variant-id="{{item.variant.id}}">-</button>
+      <button class="js-product-remove-button" data-variant-id="{{item.variant.id}}">delete</button>
+    </div>
+  </article>
+  {% endfor %}
+  <div>
+    {% if cart.item_count > 0 %}
+      <button id="sideCartButton">
+        {{ 'sections.cart.checkout' | t }}{{ cart.total_price | money }}
+      </button>
+    {% endif %}
+  </div>
+</div>

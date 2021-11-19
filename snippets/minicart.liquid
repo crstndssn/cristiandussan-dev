@@ -1,0 +1,20 @@
+<div class="side-cart-overlay" id="sideCartOverlay">
+  <div class="side-cart">
+    <div class="side-cart___header">
+      <p class="side-cart__title">
+        Cart
+      </p>
+      <button
+        type="button"
+        class="side-cart__close-button js-close-side-cart"
+        aria-label="{{ 'accessibility.close' | t }}"
+        id="sideCartCloseButton"
+      >
+        X
+      </button>
+    </div>
+    <div id="sideCartContent">
+      {% section 'side-cart' %}
+    </div>
+  </div>
+</div>
